@@ -1,41 +1,16 @@
 $kind: http-request
-name: Create Vehicle Safety Profile
+url: "{{baseUrl}}/vehicle/:id"
 method: POST
-url: '{{baseUrl}}/vehicle/:id'
-order: 5000
-description: |-
-  Tests the POST /vehicle/:id endpoint that creates a new vehicle safety profile in SafeStar.
-
-  Why test this? The vehicle profile is the other half of a safety scan — every scan requires
-  both a driver and a vehicle. This test verifies the full response shape including the vehicleId,
-  profileId, status, riskScore, VIN, vehicle metadata pulled from the Vehicle Service, and the
-  initial metrics. We also save the vehicleId for use in downstream vehicle tests.
 headers:
-  - key: Content-Type
-    value: application/json
-  - key: Accept
-    value: application/json
+  Content-Type: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1002'
+  id: "1002"
 body:
   type: json
-  content: |-
-    {
-      "vin": "{VEHICLE_IDENTIFICATION_NUMBER}",
-      "tpms": "OK",
-      "tailLights": "OK",
-      "oilPressure": "OK",
-      "sensors": "OK",
-      "defrost": "OK",
-      "airbags": "OK",
-      "battery": "OK",
-      "newCode": true,
-      "activeCodes": ["P0300","P0420","P0455","P0171","P0128"]
-    }
+  content: ""
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Create Vehicle Safety Profile
@@ -158,3 +133,5 @@ scripts:
       const vehicleId = responseBody.vehicleId;
       pm.collectionVariables.set("vehicleId", vehicleId);
       console.log("Saved vehicleId to collection variables:", vehicleId);
+    language: text/javascript
+order: 5000

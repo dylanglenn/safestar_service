@@ -1,5 +1,4 @@
 $kind: http-request
-name: Set JWT Auth
 url: https://postman-echo.com/get
 method: GET
 headers:

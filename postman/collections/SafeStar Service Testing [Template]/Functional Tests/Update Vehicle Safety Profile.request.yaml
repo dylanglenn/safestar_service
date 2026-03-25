@@ -1,30 +1,15 @@
 $kind: http-request
-name: Update Vehicle Safety Profile
+url: "{{baseUrl}}/vehicle/:id"
 method: PATCH
-url: '{{baseUrl}}/vehicle/:id'
-order: 7000
-description: |-
-  Tests the PATCH /vehicle/:id endpoint that partially updates a vehicle safety profile.
-
-  Why test this? PATCH is used for partial updates — only the fields provided in the request
-  body are changed. We verify the server returns 200, the response is valid JSON, the vehicleId
-  is still present, and critically that the updatedAt timestamp has been updated. The updatedAt
-  check is important because it confirms the update was actually persisted, not just acknowledged.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1002'
+  id: "1002"
 body:
   type: json
-  content: |-
-    {
-      "newCode": false
-    }
+  content: ""
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Update Vehicle Safety Profile (PATCH)
@@ -77,3 +62,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 7000

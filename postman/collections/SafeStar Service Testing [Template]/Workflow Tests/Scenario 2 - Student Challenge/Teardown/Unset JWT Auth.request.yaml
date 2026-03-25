@@ -1,5 +1,4 @@
 $kind: http-request
-name: Unset JWT Auth
 url: https://postman-echo.com/get
 method: GET
 headers:

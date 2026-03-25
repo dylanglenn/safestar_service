@@ -1,25 +1,12 @@
 $kind: http-request
-name: Send Diagnostic Report
+url: "{{baseUrl}}/diagnostics/send/:id"
 method: POST
-url: '{{baseUrl}}/diagnostics/send/:id'
-order: 14000
-description: |-
-  Tests the POST /diagnostics/send/:id endpoint that sends a completed diagnostic report
-  to the relevant parties (e.g. via email or notification).
-
-  Why test this? Sending a report is a fire-and-forget action — the server processes the
-  send request and returns 204 No Content with no body. We verify the correct status code
-  and empty body, confirming the API follows REST conventions for actions that don't
-  return data. Response time is also checked.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1'
+  id: "1"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Send Diagnostic Report
@@ -54,3 +41,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 14000

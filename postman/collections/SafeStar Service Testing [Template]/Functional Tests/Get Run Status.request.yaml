@@ -1,24 +1,12 @@
 $kind: http-request
-name: Get Run Status
+url: "{{baseUrl}}/run/:id"
 method: GET
-url: '{{baseUrl}}/run/:id'
-order: 10000
-description: |-
-  Tests the GET /run/:id endpoint that retrieves the current status of a safety scan run.
-
-  Why test this? After starting a scan, clients poll this endpoint to check whether the scan
-  has completed. We verify the run ID is returned, the status is a valid string, and critically
-  that the status is one of the known enum values. The enum check guards against typos or
-  unexpected states being introduced by the API. Response time is also checked.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1'
+  id: "1"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Get Run Status
@@ -82,3 +70,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 10000

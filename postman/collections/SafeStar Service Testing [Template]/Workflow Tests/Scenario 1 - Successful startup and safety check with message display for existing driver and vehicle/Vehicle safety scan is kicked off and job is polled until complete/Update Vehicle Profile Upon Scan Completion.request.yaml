@@ -1,5 +1,4 @@
 $kind: http-request
-name: Update Vehicle Profile Upon Scan Completion
 url: "{{baseUrl}}/vehicle/:id"
 method: PATCH
 headers:
@@ -8,8 +7,5 @@ pathVariables:
   id: "1002"
 body:
   type: json
-  content: |-
-    {
-        "newCode": false
-    }
+  content: ""
 order: 3000

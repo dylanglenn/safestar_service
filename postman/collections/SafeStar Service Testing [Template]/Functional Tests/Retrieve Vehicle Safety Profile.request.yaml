@@ -1,24 +1,12 @@
 $kind: http-request
-name: Retrieve Vehicle Safety Profile
+url: "{{baseUrl}}/vehicle/:id"
 method: GET
-url: '{{baseUrl}}/vehicle/:id'
-order: 6000
-description: |-
-  Tests the GET /vehicle/:id endpoint that retrieves an existing vehicle safety profile.
-
-  Why test this? After creating a vehicle profile, we need to confirm the data was persisted
-  and can be read back with the correct structure. This test validates the vehicleId, status,
-  riskScore, and the metrics object. Response time is also checked to catch performance issues
-  in the vehicle profile lookup path.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1002'
+  id: "1002"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Retrieve Vehicle Safety Profile
@@ -102,3 +90,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 6000

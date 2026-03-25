@@ -1,23 +1,12 @@
 $kind: http-request
-name: Cancel Run
+url: "{{baseUrl}}/run/:id"
 method: DELETE
-url: '{{baseUrl}}/run/:id'
-order: 11000
-description: |-
-  Tests the DELETE /run/:id endpoint that cancels an in-progress or queued safety scan run.
-
-  Why test this? Users may need to cancel a scan that was started by mistake or is taking too
-  long. We verify the API returns 204 No Content with an empty body, following the same REST
-  convention as other DELETE endpoints in this API. Response time is also checked.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1'
+  id: "1"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Cancel Run
@@ -49,3 +38,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 11000

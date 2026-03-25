@@ -1,5 +1,4 @@
 $kind: collection
-name: Diagnostic report is sent to SafeStar
 scripts:
   - type: http:afterResponse
     code: >-
@@ -10,4 +9,5 @@ scripts:
               // Assert that the actual response code is included in the expectedStatusCodes array
               pm.expect(pm.response.code).to.be.oneOf(expectedStatusCodes);
           });
+    language: text/javascript
 order: 4000

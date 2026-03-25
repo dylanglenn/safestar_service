@@ -1,25 +1,12 @@
 $kind: http-request
-name: Run Diagnostic and Generate Report
+url: "{{baseUrl}}/diagnostics/generate/:vehicleId"
 method: POST
-url: '{{baseUrl}}/diagnostics/generate/:vehicleId'
-order: 12000
-description: |-
-  Tests the POST /diagnostics/generate/:vehicleId endpoint that kicks off an async diagnostic
-  report generation job for a vehicle.
-
-  Why test this? Diagnostic report generation is an async operation — the API accepts the
-  request, queues the job, and returns immediately with a report ID. We verify the job starts
-  in "queued" state and save the report ID for use in the Retrieve Diagnostic Report request.
-  This is a classic async API pattern: submit → poll → retrieve.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: vehicleId
-    value: '1002'
+  vehicleId: "1002"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Run Diagnostic and Generate Report
@@ -72,3 +59,5 @@ scripts:
       const reportId = responseBody.id;
       pm.collectionVariables.set("reportId", reportId);
       console.log("Saved reportId to collection variables:", reportId);
+    language: text/javascript
+order: 12000

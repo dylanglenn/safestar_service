@@ -1,25 +1,12 @@
 $kind: http-request
-name: Retrieve Diagnostic Report
+url: "{{baseUrl}}/diagnostics/:id"
 method: GET
-url: '{{baseUrl}}/diagnostics/:id'
-order: 13000
-description: |-
-  Tests the GET /diagnostics/:id endpoint that retrieves a completed diagnostic report.
-
-  Why test this? The diagnostic report is the most complex response in the SafeStar API —
-  it contains nested objects for the job metadata, vehicle info, individual safety checks,
-  diagnostic trouble codes, and a summary. We verify every layer of this structure, loop
-  over the checks and active codes to validate each item, and confirm the summary counts
-  are numbers. This test demonstrates how to handle deeply nested API responses in Postman.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1'
+  id: "1"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Retrieve Diagnostic Report
@@ -216,3 +203,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 13000

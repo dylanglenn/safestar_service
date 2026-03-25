@@ -1,31 +1,14 @@
 $kind: http-request
-name: Get Driver Message Display
+url: "{{baseUrl}}/display"
 method: GET
-url: '{{baseUrl}}/display'
-order: 15000
-description: |-
-  Tests the GET /display endpoint that generates a personalized safety message for a driver.
-
-  Why test this? The display endpoint produces the human-facing output of the SafeStar service —
-  the message a driver sees in the app after a safety scan. We verify both the plain-text and
-  HTML versions of the message exist, are non-empty strings, and that the HTML is structurally
-  valid (contains a <div> tag). An empty or malformed message would mean the personalization
-  engine failed silently.
 headers:
-  - key: Content-Type
-    value: application/json
-  - key: Accept
-    value: application/json
+  Content-Type: application/json
+  Accept: application/json
 body:
   type: json
-  content: |-
-    {
-      "driver": "1001",
-      "vehicle": "1002"
-    }
+  content: ""
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Get Driver Message Display
@@ -113,3 +96,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 15000

@@ -3,13 +3,21 @@ name: Existing vehicle is found
 url: "{{baseUrl}}/vehicle/:id"
 method: GET
 pathVariables:
-  - key: id
-    value: "1002"
+  id: "1002"
 scripts:
   - type: afterResponse
     code: |-
+      const qaWorkshopPackage = pm.require('@postvehicle-enterprise-team-b7cf0c6a-39c8-436a-bede-fd9ea42b/qa_workshop_package');
+
       pm.test("Status code is 200", function () {
           pm.response.to.have.status(200);
       });
+
+      pm.test("VIN is valid", ()=> {
+          pm.expect(qaWorkshopPackage.isValidVIN(pm.response.json().vehicle.vin)).to.be.true;
+      });
     language: text/javascript
+    packages:
+      "@postvehicle-enterprise-team-b7cf0c6a-39c8-436a-bede-fd9ea42b/qa_workshop_package":
+        id: 019ce8dc-162e-704d-bb26-40700db2e396
 order: 2000

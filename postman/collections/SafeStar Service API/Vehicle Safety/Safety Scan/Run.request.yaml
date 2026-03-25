@@ -6,10 +6,6 @@ headers:
   Accept: application/json
 body:
   type: json
-  content: |-
-    {
-      "vehicle": "1002",
-      "driver": "1001"
-    }
+  content: ""
 examples: ./.resources/Run.resources/examples
 order: 1000

@@ -1,5 +1,4 @@
 $kind: http-request
-name: Create Driver Safety Profile
 url: "{{baseUrl}}/driver/:id"
 method: POST
 headers:
@@ -9,6 +8,6 @@ pathVariables:
   id: "1001"
 body:
   type: json
-  content: "{}"
+  content: ""
 examples: ./.resources/Create Driver Safety Profile.resources/examples
 order: 1000

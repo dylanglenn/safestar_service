@@ -1,24 +1,12 @@
 $kind: http-request
-name: Update Driver Safety Profile
+url: "{{baseUrl}}/driver/:id"
 method: PUT
-url: '{{baseUrl}}/driver/:id'
-order: 3000
-description: |-
-  Tests the PUT /driver/:id endpoint that updates an existing driver safety profile.
-
-  Why test this? Updates are one of the most error-prone operations in any API. We verify
-  that the server returns 200 (not 201), that the response still contains a valid profile
-  shape, and that the safetyScore is still a valid number after the update. We also check
-  response time to catch any performance regressions introduced by update logic.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1001'
+  id: "1001"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Update Driver Safety Profile
@@ -84,3 +72,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 3000

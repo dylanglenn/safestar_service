@@ -1,24 +1,12 @@
 $kind: http-request
-name: Delete Driver Safety Profile
+url: "{{baseUrl}}/driver/:id"
 method: DELETE
-url: '{{baseUrl}}/driver/:id'
-order: 4000
-description: |-
-  Tests the DELETE /driver/:id endpoint that removes a driver safety profile from the system.
-
-  Why test this? Deletion is irreversible, so it's critical to verify the API follows the
-  correct REST convention: 204 No Content with an empty body. We also confirm the response
-  arrives quickly. This request should be run last in the driver profile sequence, since
-  deleting the profile will cause subsequent Retrieve/Update tests to return 404.
 headers:
-  - key: Accept
-    value: application/json
+  Accept: application/json
 pathVariables:
-  - key: id
-    value: '1001'
+  id: "1001"
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       // ─────────────────────────────────────────────────────────────────────────────
       // FUNCTIONAL TEST: Delete Driver Safety Profile
@@ -56,3 +44,5 @@ scripts:
       pm.test("Response time is under 2000ms", function () {
           pm.expect(pm.response.responseTime).to.be.below(2000);
       });
+    language: text/javascript
+order: 4000

@@ -3,13 +3,15 @@ name: Safety scan encounters unexpected error
 url: "{{baseUrl}}/run"
 method: POST
 headers:
-  - key: x-mock-response-code
-    value: "500"
+  x-mock-response-code: "500"
 body:
   type: json
-  content: |-
-    {
-      "vehicle": "1002",
-      "driver": "1001"
-    }
+  content: ""
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 500", function () {
+          pm.response.to.have.status(500);
+      });
+    language: text/javascript
 order: 1000
