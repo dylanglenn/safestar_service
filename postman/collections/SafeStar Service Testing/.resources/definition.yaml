@@ -1,4 +1,5 @@
 $kind: collection
+name: SafeStar Service Testing
 description: "A reusable testing template for the SafeStar Service API. Provides
   a structured starting point for building out a full test suite, organized into
   five test categories: Functional Tests, Integration Tests, Performance Tests,
