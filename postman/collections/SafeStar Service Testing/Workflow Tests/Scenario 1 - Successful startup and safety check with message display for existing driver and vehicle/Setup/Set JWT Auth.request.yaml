@@ -84,7 +84,5 @@ scripts:
       pm.environment.set('jwt_signed', signedToken)
 
       console.log('Signed and encoded JWT', signedToken)
-
-      pm.execution.skipRequest();
     language: text/javascript
 order: 1000
