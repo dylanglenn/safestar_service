@@ -11,4 +11,11 @@ body:
       "vehicle": "1002",
       "driver": "1001"
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+    language: text/javascript
 order: 1000
