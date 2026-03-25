@@ -2,9 +2,11 @@ name: Automated API tests using Postman CLI
 
 on: 
   workflow_dispatch:
-  pull_request:
-    types:
-      [opened, synchronize, reopened, ready_for_review]
+  pull_request_target:
+    branches:
+      - main
+      - stage
+      - dev
 
 jobs:
   automated-api-tests:
