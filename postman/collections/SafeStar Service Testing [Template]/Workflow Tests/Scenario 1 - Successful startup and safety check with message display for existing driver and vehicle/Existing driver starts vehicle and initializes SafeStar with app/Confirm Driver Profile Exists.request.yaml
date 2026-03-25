@@ -1,4 +1,5 @@
 $kind: http-request
+name: Confirm Driver Profile Exists
 url: "{{baseUrl}}/driver/:id"
 method: GET
 pathVariables:
@@ -30,7 +31,7 @@ scripts:
               required: ["firstName", "lastName", "license", "email"],
               properties: {
                 firstName: { type: "string" },
-                lastName: { type: "number" },
+                lastName: { type: "string" },
                 email: { type: "string" },
                 license: {
                   type: "object",
