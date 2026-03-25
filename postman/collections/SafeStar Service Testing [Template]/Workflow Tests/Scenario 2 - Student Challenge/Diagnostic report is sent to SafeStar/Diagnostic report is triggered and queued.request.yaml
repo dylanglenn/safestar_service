@@ -1,0 +1,18 @@
+$kind: http-request
+name: Diagnostic report is triggered and queued
+url: "{{baseUrl}}/diagnostics/generate/:vehicleId"
+method: POST
+headers:
+  - key: x-mock-response-code
+    value: "201"
+pathVariables:
+  - key: vehicleId
+    value: "1002"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+    language: text/javascript
+order: 1000
