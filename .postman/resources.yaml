@@ -1,0 +1,16 @@
+# Use this workspace to collaborate
+workspace:
+  id: 4b256752-89cf-43f2-8bda-afad219057e1
+
+localResources:
+  specs:
+    - ../index.yaml
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+cloudResources:
+  specs:
+    ../index.yaml: cc69cfe7-3aab-41a5-a7ea-c7f47392c0c6
+    ../postman/specs/SafeStar_Spec.yaml: 40207f34-9cc0-4f06-9934-e11031a2c19a
+  collections:
+    ../postman/collections/SafeStar Service Testing: 51749751-927e3358-c4e6-4a09-ba9b-d5b295f7a499
+    ../postman/collections/SafeStar Service API: 51749751-f6de5880-2073-47b5-b08e-05df75f0a1e3
