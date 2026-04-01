@@ -1,12 +1,13 @@
 $kind: http-request
+name: Poll for Safety Scan Status
 url: "{{baseUrl}}/run/:id"
 method: GET
 pathVariables:
-  id: "1"
+  id: "{{safetyScanID}}"
 scripts:
   - type: afterResponse
     code: |-
-      while(pm.response.json().status === "QUEUED") {
+      if(pm.response.json().status === "QUEUED") {
           pm.execution.setNextRequest('Poll for Safety Scan Status');
       }
     language: text/javascript

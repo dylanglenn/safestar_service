@@ -20,6 +20,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API Tests with Collection/Folder - Demo
         run: |
+          postman collection run ./postman/collections/SafeStar\ Service\ Testing/Workflow\ Tests/Scenario\ 1\ -\ Successful\ startup\ and\ safety\ check\ with\ message\ display\ for\ existing\ driver\ and\ vehicle -e ./postman/environments/Test.environment.yaml --report-events
           postman collection run ./postman/collections/SafeStar\ Service\ Testing/Workflow\ Tests/Scenario\ 1\ -\ Successful\ startup\ and\ safety\ check\ with\ message\ display\ for\ existing\ driver\ and\ vehicle -e ./postman/environments/Prod.environment.yaml --report-events
       - name: Run API Tests with Monitor
         run: |
