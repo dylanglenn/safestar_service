@@ -3,8 +3,7 @@ name: Existing vehicle is found
 url: "{{baseUrl}}/vehicle/:id"
 method: GET
 pathVariables:
-  - key: id
-    value: "1002"
+  id: "{{vehicleID}}"
 scripts:
   - type: afterResponse
     code: |-

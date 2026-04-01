@@ -8,8 +8,8 @@ body:
   type: json
   content: |-
     {
-      "vehicle": "1002",
-      "driver": "1001"
+      "vehicle": "{{vehicleID}}",
+      "driver": "{{driverID}}"
     }
 scripts:
   - type: afterResponse
@@ -17,5 +17,7 @@ scripts:
       pm.test("Status code is 201", function () {
           pm.response.to.have.status(201);
       });
+
+      pm.collectionVariables.set("safetyScanID", pm.response.json().run);
     language: text/javascript
 order: 1000

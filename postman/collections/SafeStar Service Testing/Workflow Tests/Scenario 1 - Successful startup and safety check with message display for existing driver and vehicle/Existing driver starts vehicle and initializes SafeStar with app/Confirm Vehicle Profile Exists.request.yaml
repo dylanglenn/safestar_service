@@ -1,6 +1,7 @@
 $kind: http-request
+name: Confirm Vehicle Profile Exists
 url: "{{baseUrl}}/vehicle/:id"
 method: GET
 pathVariables:
-  id: "1002"
+  id: "{{vehicleID}}"
 order: 2000

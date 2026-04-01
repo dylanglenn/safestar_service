@@ -5,7 +5,7 @@ method: PATCH
 headers:
   x-mock-response-code: "200"
 pathVariables:
-  id: "1002"
+  id: "{{vehicleID}}"
 body:
   type: json
   content: |-
