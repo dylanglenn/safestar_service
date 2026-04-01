@@ -11,4 +11,47 @@ scripts:
           pm.response.to.have.status(200);
       });
     language: text/javascript
+  - type: beforeRequest
+    code: >
+      const jose = pm.require('jsr:@panva/jose@6.2.2');
+
+
+
+      /**
+       * Creates a JSON Web Token.
+       * @param {string} issuer - The issuer claim (iss).
+       * @param {string} subject - The subject claim (sub).
+       * @param {string} secret - The secret key for signing.
+       * @returns {Promise<string>} The generated JWT token.
+       */
+      async function createJsonWebToken(issuer, subject, secret) {
+          const secretKey = new TextEncoder().encode(secret); // Key must be a Uint8Array
+          const now = Math.round(Date.now() / 1000);
+
+          const jwt = await new jose.SignJWT({
+              'sub': subject,
+              'iss': issuer,
+              'iat': now, // Issued at time
+          })
+              .setProtectedHeader({ alg: 'HS256', typ: 'JWT' }) // Set algorithm and type
+              .setExpirationTime('1h') // Token valid for 1 hour
+              .sign(secretKey); // Sign with the secret key
+
+          return jwt;
+      }
+
+
+      // Example usage:
+
+      createJsonWebToken('postvehicle-qa', 'qa-user-1',
+      pm.vault.get("jwt_secret"))
+          .then((token) => {
+              console.log('Generated JWT:', token);
+              // You can paste this token into the [jwt.io Debugger](https://jwt.io/) to verify its contents
+          })
+          .catch(console.error);
+    language: text/javascript
+    packages:
+      jsr:@panva/jose@6.2.2:
+        id: jsr:@panva/jose@6.2.2
 order: 1000

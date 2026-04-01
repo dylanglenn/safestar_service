@@ -6,83 +6,46 @@ headers:
   Accept: application/json
 scripts:
   - type: beforeRequest
-    code: >-
-      // JWT generation script adapted from
-
-      // https://gist.github.com/corbanb/db03150abbe899285d6a86cc480f674d
+    code: >
+      const jose = pm.require('jsr:@panva/jose@6.2.2');
 
 
-      var jwtSecret = pm.environment.get('jwt_secret') || ''
 
+      /**
+       * Creates a JSON Web Token.
+       * @param {string} issuer - The issuer claim (iss).
+       * @param {string} subject - The subject claim (sub).
+       * @param {string} secret - The secret key for signing.
+       * @returns {Promise<string>} The generated JWT token.
+       */
+      async function createJsonWebToken(issuer, subject, secret) {
+          const secretKey = new TextEncoder().encode(secret); // Key must be a Uint8Array
+          const now = Math.round(Date.now() / 1000);
 
-      // Set headers for JWT
+          const jwt = await new jose.SignJWT({
+              'sub': subject,
+              'iss': issuer,
+              'iat': now, // Issued at time
+          })
+              .setProtectedHeader({ alg: 'HS256', typ: 'JWT' }) // Set algorithm and type
+              .setExpirationTime('1h') // Token valid for 1 hour
+              .sign(secretKey); // Sign with the secret key
 
-      var header = {
-      	'typ': 'JWT',
-      	'alg': 'HS256'
-      };
-
-
-      // Prepare timestamp in seconds
-
-      var currentTimestamp = Math.floor(Date.now() / 1000)
-
-
-      var data = {
-      	'iss': pm.environment.get('jwt_iss') || '',
-      	'ist': pm.environment.get('jwt_ist') || '',
-      	'iat': currentTimestamp,
-      	'exp': currentTimestamp + 30, // expiry time is 30 seconds from time of creation
-      	'jti': 'jwt_nonce'
+          return jwt;
       }
 
 
+      // Example usage:
 
-      function base64url(source) {
-          // Encode in classical base64
-          encodedSource = CryptoJS.enc.Base64.stringify(source)
-          
-          // Remove padding equal characters
-          encodedSource = encodedSource.replace(/=+$/, '')
-          
-          // Replace characters according to base64url specifications
-          encodedSource = encodedSource.replace(/\+/g, '-')
-          encodedSource = encodedSource.replace(/\//g, '_')
-          
-          return encodedSource
-      }
-
-
-      // encode header
-
-      var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header))
-
-      var encodedHeader = base64url(stringifiedHeader)
-
-
-      // encode data
-
-      var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data))
-
-      var encodedData = base64url(stringifiedData)
-
-
-      // build token
-
-      var token = `${encodedHeader}.${encodedData}`
-
-
-      // sign token
-
-      var signature = CryptoJS.HmacSHA256(token, jwtSecret)
-
-      signature = base64url(signature)
-
-      var signedToken = `${token}.${signature}`
-
-
-      pm.environment.set('jwt_signed', signedToken)
-
-      console.log('Signed and encoded JWT', signedToken)
+      createJsonWebToken('postvehicle-qa', 'qa-user-1',
+      pm.vault.get("jwt_secret"))
+          .then((token) => {
+              console.log('Generated JWT:', token);
+              // You can paste this token into the [jwt.io Debugger](https://jwt.io/) to verify its contents
+          })
+          .catch(console.error);
     language: text/javascript
+    packages:
+      jsr:@panva/jose@6.2.2:
+        id: jsr:@panva/jose@6.2.2
 order: 1000
