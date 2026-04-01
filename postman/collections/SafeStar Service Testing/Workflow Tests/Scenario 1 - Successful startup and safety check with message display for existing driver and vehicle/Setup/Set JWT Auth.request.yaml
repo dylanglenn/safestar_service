@@ -35,10 +35,13 @@ scripts:
       }
 
 
+      const secret = pm.vault.get("jwt_secret") ||
+      pm.environment.get("jwt_secret")
+
+
       // Example usage:
 
-      createJsonWebToken('postvehicle-qa', 'qa-user-1',
-      pm.vault.get("jwt_secret"))
+      createJsonWebToken('postvehicle-qa', 'qa-user-1', secret)
           .then((token) => {
               console.log('Generated JWT:', token);
               // You can paste this token into the [jwt.io Debugger](https://jwt.io/) to verify its contents
