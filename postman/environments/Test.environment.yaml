@@ -6,4 +6,7 @@ values:
   - key: jwt_secret
     value: a-string-secret-at-least-256-bits-long
     enabled: true
+  - key: jwt_signed
+    value: <>
+    enabled: true
 color: 60
