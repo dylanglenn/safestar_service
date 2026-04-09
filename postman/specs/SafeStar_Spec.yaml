@@ -9,7 +9,7 @@ info:
 
     ## Base URL
 
-    All requests use `{{baseUrl}}` as the API host (set this in your active
+    All requests use `https://api.getpostman.com` as the API host (set this in your active
     environment, e.g., Dev/Stage/Prod).
 
 
@@ -29,8 +29,9 @@ info:
     - **Reporting**: Generate diagnostics for a vehicle, retrieve a diagnostic
     report, and send the report.
 
+
 servers:
-  - url: '{{baseUrl}}'
+  - url: 'https://api.getpostman.com'
 paths:
   /driver/{id}:
     parameters:
