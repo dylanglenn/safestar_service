@@ -14,3 +14,5 @@ variables:
   diagnosticRunID: ""
 auth:
   type: bearer
+  credentials:
+    token: "{{vault:jwt_signed}}"
