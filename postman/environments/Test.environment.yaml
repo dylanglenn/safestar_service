@@ -3,4 +3,7 @@ values:
   - key: baseUrl
     value: 'https://demo.postman-academy.com/v1/safestar-test'
     enabled: true
+  - key: jwt_secret
+    value: a-string-secret-at-least-256-bits-long
+    enabled: true
 color: 60
