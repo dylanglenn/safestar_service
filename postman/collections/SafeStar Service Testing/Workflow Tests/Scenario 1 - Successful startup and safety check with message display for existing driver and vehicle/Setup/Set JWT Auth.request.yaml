@@ -44,7 +44,7 @@ scripts:
           .then((token) => {
               console.log(pm.environment.get('jwt_secret'))
               console.log('Generated JWT:', token);
-              pm.environment.set('jwt_signed', token)
+              pm.variables.set('jwt_signed', token)
               // You can paste this token into the [jwt.io Debugger](https://jwt.io/) to verify its contents
           })
           .catch(console.error);
