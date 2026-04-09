@@ -8,10 +8,10 @@ description: "A reusable testing template for the SafeStar Service API. Provides
   and safety check flow, and a student challenge scenario covering error
   handling and diagnostic reporting — each with Setup and Teardown steps."
 variables:
-  driverID: ""
-  vehicleID: ""
-  safetyScanID: ""
-  diagnosticRunID: ""
+  driverID: "1001"
+  vehicleID: "1002"
+  safetyScanID: "58"
+  diagnosticRunID: "52"
 auth:
   type: bearer
   credentials:
