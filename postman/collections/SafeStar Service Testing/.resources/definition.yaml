@@ -12,3 +12,5 @@ variables:
   vehicleID: ""
   safetyScanID: ""
   diagnosticRunID: ""
+auth:
+  type: bearer
