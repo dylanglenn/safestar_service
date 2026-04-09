@@ -3,8 +3,7 @@ name: Diagnostic report retrieved
 url: "{{baseUrl}}/diagnostics/:id"
 method: GET
 pathVariables:
-  - key: id
-    value: "1"
+  id: "{{diagnosticRunID}}"
 scripts:
   - type: afterResponse
     code: |-

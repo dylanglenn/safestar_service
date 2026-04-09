@@ -5,11 +5,14 @@ method: POST
 headers:
   - key: x-mock-response-code
     value: "500"
+  - key: test-fail
+    value: "true"
+    disabled: true
 body:
   type: json
   content: |-
     {
-      "vehicle": "1002",
-      "driver": "1001"
+      "vehicle": "{{vehicleID}}",
+      "driver": "{{driverID}}"
     }
 order: 1000

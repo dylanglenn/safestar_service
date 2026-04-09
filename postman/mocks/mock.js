@@ -96,7 +96,7 @@ const server = http.createServer((req, res) => {
         "hardStops": 0,
         "speeding": 1,
         "nightDrives": 0,
-        "weather": 0,
+        "weather": 2,
         "ignoredWarnings": 0
       }));
     });

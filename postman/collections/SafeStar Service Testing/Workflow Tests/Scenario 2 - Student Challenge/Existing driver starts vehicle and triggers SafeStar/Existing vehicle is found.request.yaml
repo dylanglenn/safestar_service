@@ -3,13 +3,5 @@ name: Existing vehicle is found
 url: "{{baseUrl}}/vehicle/:id"
 method: GET
 pathVariables:
-  - key: id
-    value: "1002"
-scripts:
-  - type: afterResponse
-    code: |-
-      pm.test("Status code is 200", function () {
-          pm.response.to.have.status(200);
-      });
-    language: text/javascript
+  id: "{{vehicleID}}"
 order: 2000

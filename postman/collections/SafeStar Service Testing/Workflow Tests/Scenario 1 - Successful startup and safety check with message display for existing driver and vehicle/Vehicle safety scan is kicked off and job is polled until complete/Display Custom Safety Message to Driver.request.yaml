@@ -1,7 +1,12 @@
 $kind: http-request
+name: Display Custom Safety Message to Driver
 url: "{{baseUrl}}/display"
 method: GET
 body:
   type: json
-  content: ""
+  content: |-
+    {
+      "driver": "{{driverID}}",
+      "vehicle": "{{vehicleID}}"
+    }
 order: 4000

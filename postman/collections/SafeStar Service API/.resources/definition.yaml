@@ -166,9 +166,6 @@ description: >-
 variables:
   baseUrl: "{{baseUrl}}"
 auth:
-  - id: 93b5f4f4-a1eb-428e-9079-d9a258cb1192
-    type: apikey
-    name: apikey auth
-    credentials:
-      value: "{{vault:apiKey}}"
-      key: X-API-Key
+  type: bearer
+  credentials:
+    token: "{{vault:jwt_signed}}"

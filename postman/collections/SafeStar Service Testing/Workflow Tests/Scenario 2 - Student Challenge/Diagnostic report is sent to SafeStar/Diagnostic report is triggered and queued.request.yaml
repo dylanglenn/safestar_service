@@ -3,16 +3,16 @@ name: Diagnostic report is triggered and queued
 url: "{{baseUrl}}/diagnostics/generate/:vehicleId"
 method: POST
 headers:
-  - key: x-mock-response-code
-    value: "201"
+  x-mock-response-code: "201"
 pathVariables:
-  - key: vehicleId
-    value: "1002"
+  vehicleId: "{{vehicleID}}"
 scripts:
   - type: afterResponse
     code: |-
       pm.test("Status code is 201", function () {
           pm.response.to.have.status(201);
       });
+
+      pm.collectionVariables.set("diagnosticRunID", pm.response.json().id);
     language: text/javascript
 order: 1000
